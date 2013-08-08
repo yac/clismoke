@@ -16,6 +16,11 @@ As I don't think this is a proper task for bash, I rather attempted to write
 my own solution. Although extending Tempest to use CLIs is an option, it is
 rather heavy-weight and not very friendly to my use case.
 
+## Requirements
+
+ * python (developed on 2.7)
+ * `blessings` module - colours are a must
+
 ## How do I use it
 
 `clismoke` is a python module providing tests with required functionality.
