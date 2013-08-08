@@ -1,4 +1,4 @@
-= OpenStack clients smoke tests =
+# OpenStack clients smoke tests
 
 I was missing a tool to check basic OpenStack installation functionality using
 client executables so I wrote one.
@@ -16,7 +16,7 @@ As I don't think this is a proper task for bash, I rather attempted to write
 my own solution. Although extending Tempest to use CLIs is an option, it is
 rather heavy-weight and not very friendly to my use case.
 
-== How do I use it ==
+## How do I use it
 
 `clismoke` is a python module providing tests with required functionality.
 
