@@ -19,6 +19,9 @@ log.addHandler(handler)
 term = blessings.Terminal()
 
 
+def error(*args, **kwargs):
+    log.error(*args, **kwargs)
+
 def warning(*args, **kwargs):
     log.warning(*args, **kwargs)
 

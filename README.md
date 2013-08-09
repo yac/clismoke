@@ -26,4 +26,11 @@ rather heavy-weight and not very friendly to my use case.
 `clismoke` is a python module providing tests with required functionality.
 
 Tests live in a `tests` directory and can be run by simply executing them.
-`run_tests.sh` is just a crude script to execute all tests.
+`run_tests.sh` is a crude script to execute all tests.
+
+To select specific tests to run, supply them as arguments, optionally
+without `test_` prefix. For example
+
+    ./tests/nova.py boot
+
+will run `test_boot()` test from `nova.py` test module.

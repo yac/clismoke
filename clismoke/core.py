@@ -1,7 +1,14 @@
+import clismoke.log as log
+
+
 class TestFailed(RuntimeError):
     pass
 
 
-def fail():
-    raise TestFailed()
+def fail(msg=None):
+    if msg:
+        log.error(msg)
+        raise TestFailed(msg)
+    else:
+        raise TestFailed()
 
