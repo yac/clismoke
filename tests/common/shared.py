@@ -17,3 +17,12 @@ def wait_for_output(command, pattern, timeout=30, period=1.0):
         t += period
         log.info("%g s remaining..." % (timeout - t))
     fail("Timeout: Command didn't return desired output within %d s." % timeout)
+
+
+def test_version(cli):
+    ver = run('%s --version 2>&1' % cli)
+    if not re.match('[0-9]+.[0-9]+', ver):
+        fail("Weird version returned.")
+
+def test_manpage(cli):
+    man = run('man %s > /dev/null' % cli, fatal=False)

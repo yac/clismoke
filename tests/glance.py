@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 import sys
-import re
-from time import sleep
 
 if __name__ == '__main__':
     import common.direct_testing as testing
@@ -12,6 +10,7 @@ from clismoke.sh import run
 from clismoke.core import fail
 import clismoke.log as log
 from clismoke.tester import run_tests_module
+
 import common.shared as shared
 
 
@@ -47,11 +46,11 @@ def test_image_basic():
     get_test_image()
     run("glance image-delete '%s'" % TEST_IMAGE_NAME)
 
-def test_packaging():
-    man = run("man glance > /dev/null")
-    ver = run("glance --version 2>&1")
-    if not re.match('[0-9]+.[0-9]+', ver):
-        fail("Weird version returned.")
+def test_version():
+    shared.test_version('glance')
+
+def test_manpage():
+    shared.test_manpage('glance')
 
 
 if __name__ == '__main__':

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import sys
-import re
 from time import sleep
 
 if __name__ == '__main__':
@@ -11,6 +10,8 @@ if __name__ == '__main__':
 from clismoke.sh import run
 from clismoke.core import fail
 from clismoke.tester import run_tests_module
+
+import common.shared as shared
 import glance
 
 
@@ -42,12 +43,12 @@ def test_boot():
     sleep(0.5)
     run("nova delete %s" % iname)
 
+def test_version():
+    shared.test_version('nova')
 
-def test_packaging():
-    man = run("man nova > /dev/null")
-    ver = run("nova --version 2>&1")
-    if not re.match('[0-9]+.[0-9]+', ver):
-        fail("Weird version returned.")
+def test_manpage():
+    shared.test_manpage('nova')
+
 
 
 if __name__ == '__main__':
