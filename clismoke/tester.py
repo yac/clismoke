@@ -25,8 +25,10 @@ def run_tests_module(module):
     for name, fun in funs:
         if selfuns and name not in selfuns:
             continue
-        log.info(term.bold("=== %s: %s ===" % (module_name, name)))
+        label = "%s: %s" % (module_name, name)
+        log.info(term.bold("=== %s ===" % label))
         try:
             fun()
+            print term.bold_green("SUCCESS %s\n" % label)
         except core.TestFailed as e:
-            print term.bold_red("FAIL %s: %s" % (module_name, name))
+            print term.bold_red("FAIL %s\n" % label)
