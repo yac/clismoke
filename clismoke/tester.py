@@ -22,6 +22,7 @@ def run_tests_module(module):
     funs = [o for o in getmembers(module, isfunction)
                        if o[0].startswith('test_')]
     selfuns = get_requested_tests()
+    failures = []
     for name, fun in funs:
         if selfuns and name not in selfuns:
             continue
@@ -31,4 +32,12 @@ def run_tests_module(module):
             fun()
             print term.bold_green("SUCCESS %s\n" % label)
         except core.TestFailed as e:
+            failures.append(label)
             print term.bold_red("FAIL %s\n" % label)
+    print
+    if failures:
+        print term.bold_red("FAILED tests:")
+        for f in failures:
+            print term.red(f)
+    else:
+        print term.bold_green("GREAT SUCCESS ;)")
