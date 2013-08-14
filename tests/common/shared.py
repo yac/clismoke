@@ -1,17 +1,19 @@
+import re
+from time import sleep
+
 from clismoke.sh import run
+from clismoke.core import fail
 import clismoke.log as log
 
-TEST_IMAGE_NAME = 'cirros-clismoke'
-TEST_IMAGE_URL = 'https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img'
 
-def ensure_test_image():
-    o = run('glance image-list | grep "%s"' % TEST_IMAGE_NAME, fatal=False)
-    if o.success:
-        log.info("Testing image is present.")
-        return
-    log.info("Getting testing image...")
-    run("glance image-create --name '%(name)s' --disk-format qcow2"
-        " --container-format bare --copy-from '%(url)s'" %{
-            'name': TEST_IMAGE_NAME,
-            'url': TEST_IMAGE_URL
-        })
+def wait_for_output(command, pattern, timeout=30, period=1.0):
+    t = 0.0
+    while t < timeout:
+        out = run(command)
+        if re.search(pattern, out):
+            log.info("Got desired output.")
+            return
+        sleep(period)
+        t += period
+        log.info("%g s remaining..." % (timeout - t))
+    fail("Timeout: Command didn't return desired output within %d s." % timeout)

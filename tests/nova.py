@@ -11,7 +11,7 @@ if __name__ == '__main__':
 from clismoke.sh import run
 from clismoke.core import fail
 from clismoke.tester import run_tests_module
-import common.shared as shared
+import glance
 
 
 INSTANCE = 'clismoke'
@@ -32,10 +32,10 @@ def get_new_instance_name():
 def test_boot():
     run("nova help > /dev/null")
     run("nova service-list")
-    shared.ensure_test_image()
+    glance.ensure_test_image()
     iname = get_new_instance_name()
     run("nova boot --flavor 1 --image %(image)s %(name)s" % {
-        'image': shared.TEST_IMAGE_NAME,
+        'image': glance.TEST_IMAGE_NAME,
         'name': iname
     })
     run("nova show %s" % iname)
