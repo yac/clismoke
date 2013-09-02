@@ -19,9 +19,9 @@ def wait_for_output(command, pattern, timeout=30, period=1.0):
     fail("Timeout: Command didn't return desired output within %d s." % timeout)
 
 
-def test_version(cli):
+def test_version(cli, prefix=''):
     ver = run('%s --version 2>&1' % cli)
-    if not re.match('[0-9]+.[0-9]+', ver):
+    if not re.match('%s[0-9]+.[0-9]+' % prefix, ver):
         fail("Weird version returned.")
 
 def test_manpage(cli):
