@@ -43,3 +43,5 @@ def test_version(cli, prefix=''):
 
 def test_manpage(cli):
     man = run('man %s > /dev/null' % cli, fatal=False)
+    if not man.success:
+        fail("No man page for %s" % cli)
