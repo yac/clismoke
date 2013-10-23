@@ -25,7 +25,7 @@ def test_basic():
     else:
         run("cinder create --display-name '%s' 1" % TEST_VOLUME_NAME)
         shared.wait_for_output("cinder show '%s'" % TEST_VOLUME_NAME,
-                               'status.*active')
+                               'status.*(available|active)')
     o = run("cinder show test_volume_clismoke")
     volume_id = shared.parse_id(o)
     o = run("cinder snapshot-create --display-name '%s' '%s'" % (TEST_SNAPSHOT_NAME, volume_id))
